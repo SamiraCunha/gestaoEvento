@@ -3,13 +3,10 @@ from django.contrib.auth.models import User
 #Atencao mudar shaper=modelador para moderator=moderador
 class Event(models.Model):
     title = models.CharField(max_length=200)
-    shaper = models.ManyToManyField('Shaper')
-    speakers = models.ManyToManyField('Speaker')
     description = models.TextField()
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     location = models.CharField(max_length=255)
-
 
     def __str__(self):
         return self.title
@@ -20,20 +17,6 @@ class Organizer(models.Model):
 
     def __str__(self):
         return self.user.username  
-
-class Speaker(models.Model):
-    name = models.CharField(max_length=100)
-    bio = models.TextField()
-
-    def __str__(self):
-        return self.name
-
-class Shaper(models.Model):
-    name = models.CharField(max_length=100)
-    bio = models.TextField()
-
-    def __str__(self):
-        return self.name
     
 class Participant(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
